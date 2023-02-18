@@ -1,0 +1,70 @@
+1. Search Request:
+	-> GET https://localhost:7031/search?DepartureAirport=CPH&Destination=SKP&FromDate=2023-05-16T05:50:06&ToDate=2023-07-16T05:50:06
+	Key: DepartureAirport, Value: CPH
+	Key: Destination, Value: SKP
+	Key: FromDate, Value: 2023-05-16T05:50:06
+	Key: ToDate, Value: 2023-07-16T05:50:06
+	
+
+	Sample Response:
+		{
+			"options": [
+				{
+					"optionCode": "7da02bc0-fd69-4071-bb3f-45a379949517",
+					"hotelCode": "8626",
+					"flightCode": "306",
+					"arrivalAirport": "SKP",
+					"price": 133
+				},
+				{
+					"optionCode": "db0223fb-eaaa-4b7b-96ee-f35bfe3cfa9c",
+					"hotelCode": "8627",
+					"flightCode": "306",
+					"arrivalAirport": "SKP",
+					"price": 139
+				}
+			]
+		}
+			
+
+2. Book Request:
+	-> POST https://localhost:7031/book
+	BODY JSON:
+	{
+		"OptionCode": "7da02bc0-fd69-4071-bb3f-45a379949517",
+		"SearchReq": 
+		{
+			"DepartureAirport": "CPH",
+			"Destination": "SKP",
+			"FromDate": "2023-05-16T05:50:06",
+			"ToDate": "2023-07-16T05:50:06"
+		}
+	}
+	
+	
+	Sample Response:
+	{
+		"bookingCode": "8XAOXM",
+		"bookingTime": "2023-02-16T22:23:18.1304947+01:00"
+	}
+
+
+3. CheckStatus Request:
+	-> GET https://localhost:7031/CheckStatus?BookingCode=8XAOXM
+	Key: BookingCode, Value: 8XAOXM
+	
+	
+	Sample Response:
+	{
+		"status": 0
+	}
+
+
+4. Authorization:
+	- In order to authenticate and gain access to the Booking API, add the following value to the header:
+		Key: Authorization, Value: basic YWRtaW46YWRtaW5Qd2Q=
+
+	- The value 'YWRtaW46YWRtaW5Qd2Q=' is base64 encoded string -> 'admin:adminPwd' for sample username and password.
+
+
+
